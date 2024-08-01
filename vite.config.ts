@@ -14,6 +14,8 @@ export default defineConfig({
         v3_relativeSplatPath: true,
         v3_throwAbortReason: true,
       },
+      // https://remix.run/docs/en/main/guides/spa-mode
+      ssr: false,
     }),
     tsconfigPaths(),
   ],
