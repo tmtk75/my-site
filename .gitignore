@@ -6,3 +6,10 @@ node_modules
 .dev.vars
 
 .wrangler
+
+.terraform
+terraform.tfstate*
+*.auto.tfvars
+
+.*.swp
+
