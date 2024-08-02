@@ -1,4 +1,5 @@
 import type { MetaFunction } from "@remix-run/cloudflare";
+import { Link, useLoaderData } from "@remix-run/react";
 
 export const meta: MetaFunction = () => {
   return [
@@ -10,32 +11,69 @@ export const meta: MetaFunction = () => {
   ];
 };
 
+export const loader = async () => {
+  const posts = await getPosts();
+  // console.log({ posts });
+  return posts.filter((post) => post);
+};
+
+type Frontmatter = {
+  title: string;
+  description: string;
+  published: string; // YYYY-MM-DD
+  draft?: boolean;
+};
+
+type PostMeta = {
+  slug: string;
+  frontmatter: Frontmatter;
+};
+
+const getPosts = async (): Promise<PostMeta[]> => {
+  const modules = import.meta.glob<{ frontmatter: Frontmatter }>(
+    "./post.*.mdx",
+    { eager: true }
+  );
+  const build = await import("virtual:remix/server-build");
+  const posts = Object.entries(modules).map(([file, post]) => {
+    const id = file.replace(/\.\//, "").replace(/\.mdx$/, "");
+    const route = build.routes[`routes/${id}`];
+    if (!route) {
+      throw new Error(`No route for ${file}`);
+    }
+    const slug = route.path;
+    if (!slug) {
+      throw new Error(`No route for ${id}`);
+    }
+    return {
+      slug,
+      frontmatter: post.frontmatter,
+    };
+  });
+  return posts;
+};
+
 export default function Index() {
+  const posts = useLoaderData<typeof loader>();
   return (
     <div className="font-sans p-4">
-      <h1 className="text-3xl">Welcome to Remix on Cloudflare2</h1>
-      <ul className="list-disc mt-4 pl-6 space-y-2">
-        <li>
-          <a
-            className="text-blue-700 underline visited:text-purple-900"
-            target="_blank"
-            href="https://remix.run/docs"
-            rel="noreferrer"
-          >
-            Remix Docs
-          </a>
-        </li>
-        <li>
-          <a
-            className="text-blue-700 underline visited:text-purple-900"
-            target="_blank"
-            href="https://developers.cloudflare.com/pages/framework-guides/deploy-a-remix-site/"
-            rel="noreferrer"
-          >
-            Cloudflare Pages Docs - Remix guide
-          </a>
-        </li>
-      </ul>
+      {posts.map(({ slug, frontmatter }) => {
+        return <Article {...{ slug, frontmatter }} key={slug} />;
+      })}
     </div>
+  );
+}
+
+function Article({ slug, frontmatter }: PostMeta) {
+  console.log({ slug, frontmatter });
+  return (
+    <article className="">
+      <Link to={`/post/${slug}`}>
+        <h3>{frontmatter.title}</h3>
+      </Link>
+      <p>{frontmatter.description}</p>
+      <p>{slug}</p>
+      <time dateTime={frontmatter.published}>{frontmatter.published}</time>
+    </article>
   );
 }
