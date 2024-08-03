@@ -7,6 +7,7 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 import "./tailwind.css";
+import "./index.scss";
 
 const navLinkClass = ({ isActive }: { isActive: boolean }) =>
   isActive ? "border-b-2 border-cyan-700" : "";
