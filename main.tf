@@ -5,8 +5,8 @@
  * $ TF_VAR_api_token=${CLOUDFLARE_API_TOKEN} terraform apply
  */
 locals {
-  account_id = var.account_id
-  project_name = "my-site"
+  account_id   = var.account_id
+  project_name = data.toml_file.wrangler.content.name
 }
 
 provider "cloudflare" {
@@ -62,6 +62,9 @@ variable "account_id" {
   type = string
 }
 
+data "toml_file" "wrangler" {
+  input = file("${path.module}/wrangler.toml")
+}
 
 terraform {
   #backend "s3" {
@@ -80,6 +83,11 @@ terraform {
     cloudflare = {
       source  = "cloudflare/cloudflare"
       version = "~> 4"
+    }
+
+    toml = {
+      source  = "Tobotimus/toml"
+      version = "~> 0.3"
     }
   }
 }
