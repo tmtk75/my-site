@@ -59,7 +59,7 @@ const navLinkClass = ({ isActive }: { isActive: boolean }) =>
 export default function Index() {
   const posts = useLoaderData<typeof loader>();
   return (
-    <>
+    <div className="prose">
       <header>
         <NavLink to={"/"} className={navLinkClass}>
           home
@@ -76,12 +76,12 @@ export default function Index() {
           return <Article {...{ slug, frontmatter }} key={slug} />;
         })}
       </div>
-    </>
+    </div>
   );
 }
 
 function Article({ slug, frontmatter }: PostMeta) {
-  console.log({ slug, frontmatter });
+  // console.log({ slug, frontmatter });
   return (
     <article className="">
       <Link to={`/post/${slug}`}>
