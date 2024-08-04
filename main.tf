@@ -28,7 +28,7 @@ resource "cloudflare_pages_project" "main" {
   deployment_configs {
     preview {
       always_use_latest_compatibility_date = false
-      compatibility_date                   = "2024-08-01"
+      compatibility_date                   = "2024-05-12"
       compatibility_flags                  = []
       d1_databases                         = {}
       durable_object_namespaces            = {}
@@ -40,7 +40,7 @@ resource "cloudflare_pages_project" "main" {
     }
     production {
       always_use_latest_compatibility_date = false
-      compatibility_date                   = "2024-08-01"
+      compatibility_date                   = "2024-05-12"
       compatibility_flags                  = []
       d1_databases                         = {}
       durable_object_namespaces            = {}
