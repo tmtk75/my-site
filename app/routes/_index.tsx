@@ -45,12 +45,13 @@ const getPosts = async (): Promise<PostMeta[]> => {
   return posts;
 };
 
+export const clientLoader = getPosts;
+
 const navLinkClass = ({ isActive }: { isActive: boolean }) =>
   isActive ? "border-b-2 border-cyan-700" : "";
 
 export default function Index() {
-  // const posts = useLoaderData<typeof loader>();
-  const posts = getPosts();
+  const posts = useLoaderData<typeof clientLoader>();
   return (
     <div className="prose">
       <header>
@@ -64,17 +65,11 @@ export default function Index() {
           about
         </NavLink>
       </header>
-      <Suspense fallback={<div>Loading...</div>}>
-        <Await resolve={posts}>
-          {(data) => (
-            <div className="font-sans p-4">
-              {data.map(({ slug, frontmatter }) => {
-                return <Article {...{ slug, frontmatter }} key={slug} />;
-              })}
-            </div>
-          )}
-        </Await>
-      </Suspense>
+      <div className="font-sans p-4">
+        {posts.map(({ slug, frontmatter }) => {
+          return <Article {...{ slug, frontmatter }} key={slug} />;
+        })}
+      </div>
     </div>
   );
 }
