@@ -1,5 +1,5 @@
 import type { MetaFunction } from "@remix-run/cloudflare";
-import { Link, useLoaderData } from "@remix-run/react";
+import { Link, NavLink, useLoaderData } from "@remix-run/react";
 
 export const meta: MetaFunction = () => {
   return [
@@ -53,14 +53,30 @@ const getPosts = async (): Promise<PostMeta[]> => {
   return posts;
 };
 
+const navLinkClass = ({ isActive }: { isActive: boolean }) =>
+  isActive ? "border-b-2 border-cyan-700" : "";
+
 export default function Index() {
   const posts = useLoaderData<typeof loader>();
   return (
-    <div className="font-sans p-4">
-      {posts.map(({ slug, frontmatter }) => {
-        return <Article {...{ slug, frontmatter }} key={slug} />;
-      })}
-    </div>
+    <>
+      <header>
+        <NavLink to={"/"} className={navLinkClass}>
+          home
+        </NavLink>
+        <NavLink to={"/post"} className={navLinkClass}>
+          post
+        </NavLink>
+        <NavLink to={"/about"} className={navLinkClass}>
+          about
+        </NavLink>
+      </header>
+      <div className="font-sans p-4">
+        {posts.map(({ slug, frontmatter }) => {
+          return <Article {...{ slug, frontmatter }} key={slug} />;
+        })}
+      </div>
+    </>
   );
 }
 

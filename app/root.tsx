@@ -1,16 +1,12 @@
 import {
   Links,
   Meta,
-  NavLink,
   Outlet,
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
-import "./tailwind.css";
 import "./index.scss";
-
-const navLinkClass = ({ isActive }: { isActive: boolean }) =>
-  isActive ? "border-b-2 border-cyan-700" : "";
+import "./tailwind.css";
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -22,17 +18,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        <header>
-          <NavLink to={"/"} className={navLinkClass}>
-            home
-          </NavLink>
-          <NavLink to={"/post"} className={navLinkClass}>
-            post
-          </NavLink>
-          <NavLink to={"/about"} className={navLinkClass}>
-            about
-          </NavLink>
-        </header>
         {children}
         <ScrollRestoration />
         <Scripts />
