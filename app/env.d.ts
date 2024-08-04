@@ -1,12 +1,7 @@
-/// <reference types="@remix-run/node" />
-/// <reference types="vite/client" />
-
 declare module "*.mdx" {
-  // biome-ignore lint:suspicious/noEplicitAny
-  let MDXComponent: (props: any) => JSX.Element;
-  // biome-ignore lint:suspicious/noEplicitAny
-  export const frontmatter: any;
+  let MDXComponent: (props: unknown) => JSX.Element;
   export default MDXComponent;
+  export const frontmatter: unknown; // supported by remarkMdxFrontmatter
 }
 
 declare module "virtual:remix/server-build" {
