@@ -1,5 +1,6 @@
 import type { MetaFunction } from "@remix-run/cloudflare";
-import { Link, NavLink, useLoaderData } from "@remix-run/react";
+import { Await, Link, NavLink, useLoaderData } from "@remix-run/react";
+import { Suspense } from "react";
 
 export const meta: MetaFunction = () => {
   return [
@@ -11,11 +12,10 @@ export const meta: MetaFunction = () => {
   ];
 };
 
-export const loader = async () => {
-  const posts = await getPosts();
-  // console.log({ posts });
-  return posts.filter((post) => post);
-};
+// export const loader = async () => {
+//   const posts = await getPosts();
+//   return posts.filter((post) => post);
+// };
 
 type Frontmatter = {
   title: string;
@@ -34,17 +34,9 @@ const getPosts = async (): Promise<PostMeta[]> => {
     "./post.*.mdx",
     { eager: true }
   );
-  const build = await import("virtual:remix/server-build");
+  // const build = await import("virtual:remix/server-build");
   const posts = Object.entries(modules).map(([file, post]) => {
-    const id = file.replace(/\.\//, "").replace(/\.mdx$/, "");
-    const route = build.routes[`routes/${id}`];
-    if (!route) {
-      throw new Error(`No route for ${file}`);
-    }
-    const slug = route.path;
-    if (!slug) {
-      throw new Error(`No route for ${id}`);
-    }
+    const slug = file.replace(/\.\/post\./, "").replace(/\.mdx$/, "");
     return {
       slug,
       frontmatter: post.frontmatter,
@@ -57,7 +49,8 @@ const navLinkClass = ({ isActive }: { isActive: boolean }) =>
   isActive ? "border-b-2 border-cyan-700" : "";
 
 export default function Index() {
-  const posts = useLoaderData<typeof loader>();
+  // const posts = useLoaderData<typeof loader>();
+  const posts = getPosts();
   return (
     <div className="prose">
       <header>
@@ -71,11 +64,17 @@ export default function Index() {
           about
         </NavLink>
       </header>
-      <div className="font-sans p-4">
-        {posts.map(({ slug, frontmatter }) => {
-          return <Article {...{ slug, frontmatter }} key={slug} />;
-        })}
-      </div>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Await resolve={posts}>
+          {(data) => (
+            <div className="font-sans p-4">
+              {data.map(({ slug, frontmatter }) => {
+                return <Article {...{ slug, frontmatter }} key={slug} />;
+              })}
+            </div>
+          )}
+        </Await>
+      </Suspense>
     </div>
   );
 }
