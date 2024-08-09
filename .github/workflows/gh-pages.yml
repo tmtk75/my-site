@@ -11,18 +11,32 @@ jobs:
       name: github-pages
       #url: https://www.tmtk.net
     env: {}
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4 # https://github.com/pnpm/action-setup
+        name: Install pnpm
+        with:
+          version: 9
+          run_install: false
+
+
       - uses: actions/setup-node@v2
+        name: Install Node.js
         with:
           node-version: "20"
-      - uses: pnpm/action-setup@v2.2.2
-      - run: pnpm
+          cache: 'pnpm'
+
+      - run: pnpm install
+
       #- run: pnpm lint
+
       - run: pnpm build
-      - run: touch ./out/.nojekyll
-      - uses: peaceiris/actions-gh-pages@v3
+
+      #- run: touch ./out/.nojekyll
+
+      - uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build/client

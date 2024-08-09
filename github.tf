@@ -41,14 +41,14 @@ import {
   id = "my-site:github-pages"
 }
 
-#resource "github_repository_environment_deployment_policy" "my_site" {
-#  repository     = github_repository.my_site.name
-#  environment    = github_repository_environment.my_site.environment
-#  branch_pattern = "releases/*"
-#}
-#
-#import {
-#  to = github_repository_environment_deployment_policy.my_site
-#  id = "my-site:gh-pages:301860457"
-#  https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository_environment_deployment_policy
-#}
+resource "github_repository_environment_deployment_policy" "my_site" {
+  repository     = github_repository.my_site.name
+  environment    = github_repository_environment.my_site.environment
+  branch_pattern = "releases/*"
+}
+
+import {
+  to = github_repository_environment_deployment_policy.my_site
+  id = "my-site:gh-pages:3651572056"
+  # https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository_environment_deployment_policy
+}
