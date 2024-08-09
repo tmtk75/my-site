@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "remix vite:build",
+    "preview": "python -m http.server --directory build/client",
     "deploy": "wrangler pages deploy",
     "dev": "remix vite:dev",
     "lint": "npx @biomejs/biome lint",

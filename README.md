@@ -1,4 +1,14 @@
 # README
+## Development
+```
+$ pnpm dev
+```
+## Build
+```
+$ pnpm build && pnpm preview
+```
+
+
 ## TBD
 ```
 TF_VAR_api_toke=${CLOUDFLARE_API_TOKEN} GITHUB_TOKEN=${GITHUB_TOKEN} terraform plan
