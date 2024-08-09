@@ -1,0 +1,29 @@
+name: github pages
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-deploy:
+    environment:
+      name: github-pages
+      #url: https://www.tmtk.net
+    env: {}
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "20"
+      - run: pnpm
+      #- run: pnpm lint
+      - run: pnpm build
+      - run: touch ./out/.nojekyll
+      - uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build/client
+          #cname: www.tmtk.net
+
