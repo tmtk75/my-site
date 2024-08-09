@@ -18,11 +18,25 @@ resource "github_repository" "my_site" {
       branch = "gh-pages"
       path   = "/"
     }
-    cname = "www.tmtk.net"
+    #cname = "www.tmtk.net"
   }
 }
 
 import {
   to = github_repository.my_site
   id = "my-site"
+}
+
+resource "github_repository_environment" "my_site" {
+  environment = "github-pages"
+  repository  = github_repository.my_site.name
+  deployment_branch_policy {
+    custom_branch_policies = true
+    protected_branches     = false
+  }
+}
+
+import {
+  to = github_repository_environment.my_site
+  id = "my-site:github-pages"
 }
