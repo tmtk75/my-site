@@ -1,7 +1,7 @@
 # README
 ## TBD
 ```
-TF_VAR_api_toke=${CLOUDFLARE_API_TOKEN} terraform plan
+TF_VAR_api_toke=${CLOUDFLARE_API_TOKEN} GITHUB_TOKEN=${GITHUB_TOKEN} terraform plan
 ```
 Please issue an API token on this page if you don't have one already:
 <https://dash.cloudflare.com/profile/api-tokens>
