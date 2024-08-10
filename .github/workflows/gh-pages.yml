@@ -34,7 +34,9 @@ jobs:
 
       - run: pnpm build
 
-      #- run: touch ./out/.nojekyll
+      - run: |
+          mkdir -p ./out
+          touch ./out/.nojekyll
 
       #
       # NOTE:
