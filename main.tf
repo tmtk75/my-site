@@ -1,8 +1,10 @@
+// https://registry.terraform.io/providers/integrations/github/latest
 provider "github" {
   owner = "tmtk75"
   # export GITHUB_TOKEN
 }
 
+# https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository
 resource "github_repository" "my_site" {
   name       = "my-site"
   visibility = "public"
@@ -14,10 +16,7 @@ resource "github_repository" "my_site" {
   vulnerability_alerts = true
 
   pages {
-    source {
-      branch = "gh-pages"
-      path   = "/"
-    }
+    build_type = "workflow"
     cname = "www.tmtk.net"
   }
 }
