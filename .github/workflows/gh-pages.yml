@@ -36,6 +36,11 @@ jobs:
 
       #- run: touch ./out/.nojekyll
 
+      #
+      # NOTE:
+      #   Visit https://github.com/tmtk75/my-site/settings/actions
+      #   Select Workflow permissions -> Read and write permissions.
+      #
       - uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
