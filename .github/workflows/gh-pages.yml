@@ -1,3 +1,5 @@
+# reference:
+#   https://github.com/brookslybrand/remix-gh-pages/blob/main/.github/workflows/build-deploy.yml#L39C1-L40C1
 name: github pages
 
 on:
@@ -42,25 +44,9 @@ jobs:
 
       - run: pnpm build
 
-      #- run: |
-      #    mkdir -p ./out
-      #    touch ./out/.nojekyll
-
-      #
-      # NOTE:
-      #   Visit https://github.com/tmtk75/my-site/settings/actions
-      #   Select Workflow permissions -> Read and write permissions.
-      #
-      #- uses: peaceiris/actions-gh-pages@v4
-      #  with:
-      #    github_token: ${{ secrets.GITHUB_TOKEN }}
-      #    publish_dir: ./build/client
-      #    #cname: www.tmtk.net
-
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload entire repository
           path: "build/client"
 
       - name: Deploy to GitHub Pages

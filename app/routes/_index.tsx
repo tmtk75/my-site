@@ -1,13 +1,16 @@
-import type { MetaFunction } from "@remix-run/cloudflare";
-import { Await, Link, NavLink, useLoaderData } from "@remix-run/react";
-import { Suspense } from "react";
+import {
+  Link,
+  type MetaFunction,
+  NavLink,
+  useLoaderData,
+} from "@remix-run/react";
 
 export const meta: MetaFunction = () => {
   return [
     { title: "New Remix App" },
     {
       name: "description",
-      content: "Welcome to Remix on Cloudflare!",
+      content: "Welcome to Remix!",
     },
   ];
 };
