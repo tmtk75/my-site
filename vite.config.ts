@@ -7,12 +7,8 @@ import tsconfigPaths from "vite-tsconfig-paths";
 import { copyFileSync } from "node:fs";
 import { join } from "node:path";
 
-const isPreview = !!process.env.PREVIEW;
-const repositoryName = "my-site";
-const basename = isPreview ? undefined : `/${repositoryName}/`;
-
 export default defineConfig({
-  base: basename,
+  // base: "/my-site/",
   plugins: [
     mdx({ remarkPlugins: [remarkFrontmatter, remarkMdxFrontmatter] }),
     remix({
@@ -20,7 +16,7 @@ export default defineConfig({
       ssr: false,
 
       // https://zenn.dev/cybozu_frontend/articles/remix-spa-mode-gh-page
-      basename,
+      // basename: "/my-site/",
       buildEnd(args) {
         if (!args.viteConfig.isProduction) return;
         const buildPath = args.viteConfig.build.outDir;

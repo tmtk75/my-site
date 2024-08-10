@@ -1,11 +1,11 @@
 {
-  "name": "my-new-site",
+  "name": "my-site",
   "private": true,
   "sideEffects": false,
   "type": "module",
   "scripts": {
     "dev": "remix vite:dev",
-    "preview": "PREVIEW=1 remix vite:build && python -m http.server --directory build/client",
+    "preview": "python -m http.server --directory build/client",
     "build": "remix vite:build",
     "lint": "npx @biomejs/biome lint",
     "typecheck": "tsc"
