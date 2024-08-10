@@ -18,7 +18,7 @@ resource "github_repository" "my_site" {
       branch = "gh-pages"
       path   = "/"
     }
-    #cname = "www.tmtk.net"
+    cname = "www.tmtk.net"
   }
 }
 
