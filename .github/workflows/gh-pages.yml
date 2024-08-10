@@ -44,8 +44,8 @@ jobs:
 
       - run: pnpm build
 
-      - run: |
-          echo www.tmtk.net > build/client/CNAME
+      #- run: |
+      #    echo www.tmtk.net > build/client/CNAME
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
