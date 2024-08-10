@@ -7,7 +7,7 @@ import {
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "New Remix App" },
+    { title: "tmtk.net" },
     {
       name: "description",
       content: "Welcome to Remix!",
