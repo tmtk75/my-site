@@ -27,6 +27,22 @@ import {
   id = "my-site"
 }
 
+resource "github_actions_repository_permissions" "my_site" {
+  allowed_actions = "all"
+  #allowed_actions_config {
+  #  github_owned_allowed = true
+  #  patterns_allowed     = ["actions/cache@*", "actions/checkout@*"]
+  #  verified_allowed     = true
+  #}
+  repository = github_repository.my_site.name
+}
+
+import {
+  to = github_actions_repository_permissions.my_site
+  id = "my-site"
+  # $ terraform import github_actions_repository_permissions.test my-repository
+}
+
 resource "github_repository_environment" "my_site" {
   environment = "github-pages"
   repository  = github_repository.my_site.name
@@ -41,14 +57,14 @@ import {
   id = "my-site:github-pages"
 }
 
-resource "github_repository_environment_deployment_policy" "my_site" {
-  repository     = github_repository.my_site.name
-  environment    = github_repository_environment.my_site.environment
-  branch_pattern = "releases/*"
-}
-
-import {
-  to = github_repository_environment_deployment_policy.my_site
-  id = "my-site:gh-pages:3651572056"
-  # https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository_environment_deployment_policy
-}
+#resource "github_repository_environment_deployment_policy" "my_site" {
+#  repository     = github_repository.my_site.name
+#  environment    = github_repository_environment.my_site.environment
+#  branch_pattern = "releases/*"
+#}
+#
+#import {
+#  to = github_repository_environment_deployment_policy.my_site
+#  id = "my-site:gh-pages:3651572056"
+#  # https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository_environment_deployment_policy
+#}
