@@ -68,3 +68,25 @@ import {
 #  id = "my-site:gh-pages:3651572056"
 #  # https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository_environment_deployment_policy
 #}
+
+
+terraform {
+  backend "s3" {
+    #
+    # terraform init -backend-config my.tfbackend
+    #
+    #     $ cat my.tfbackend
+    #     profile = "default"
+    #     region = "ap-northeast-1"
+    #     bucket = "my-terraform-state"
+    #
+    key = "terraform/github/tmtk75/my-site/terraform.tfstate"
+  }
+
+  required_providers {
+    github = {
+      source  = "hashicorp/github"
+      version = "~> 6"
+    }
+  }
+}
