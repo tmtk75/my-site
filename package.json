@@ -4,14 +4,11 @@
   "sideEffects": false,
   "type": "module",
   "scripts": {
-    "build": "remix vite:build",
-    "preview": "python -m http.server --directory build/client",
-    "deploy": "wrangler pages deploy",
     "dev": "remix vite:dev",
+    "preview": "python -m http.server --directory build/client",
+    "build": "remix vite:build",
     "lint": "npx @biomejs/biome lint",
-    "start": "wrangler pages dev",
-    "typecheck": "tsc",
-    "typegen": "wrangler types"
+    "typecheck": "tsc"
   },
   "dependencies": {
     "@remix-run/react": "^2.10.3",

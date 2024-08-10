@@ -1,5 +1,0 @@
-#:schema node_modules/wrangler/config-schema.json
-name = "my-site"
-pages_build_output_dir = "./build/client"
-compatibility_date = "2024-05-12"
-
