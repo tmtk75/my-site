@@ -68,6 +68,25 @@ export default function Index() {
           about
         </NavLink>
       </header>
+      <div>
+        <ul>
+          {[
+            {
+              href: "https://note.com/tmtk75/",
+              text: "note.com",
+            },
+            { href: "https://blog.tmtk.net/", text: "old blog" },
+            { href: "https://zenn.dev/tmtk75", text: "zenn articles" },
+            { href: "https://zenn.dev/tmtk75?tab=scraps", text: "zenn scraps" },
+            { href: "https://memodify.com", text: "memodify.com" },
+            { href: "https://memodify.com/blog", text: "memodify blog" },
+          ].map(({ href, text }) => (
+            <li key={href}>
+              <a target="other" href={href}>{text}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
       <div className="font-sans p-4">
         {posts.map(({ slug, frontmatter }) => {
           return <Article {...{ slug, frontmatter }} key={slug} />;
