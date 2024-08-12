@@ -5,8 +5,8 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
-import "./tailwind.css";
 import "./index.scss";
+import "./tailwind.css";
 
 export function HydrateFallback() {
   return <p>Loading...</p>;

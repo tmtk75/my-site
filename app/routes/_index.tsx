@@ -10,15 +10,10 @@ export const meta: MetaFunction = () => {
     { title: "tmtk.net" },
     {
       name: "description",
-      content: "Welcome to Remix!",
+      content: "TBD",
     },
   ];
 };
-
-// export const loader = async () => {
-//   const posts = await getPosts();
-//   return posts.filter((post) => post);
-// };
 
 type Frontmatter = {
   title: string;
@@ -54,45 +49,50 @@ const navLinkClass = ({ isActive }: { isActive: boolean }) =>
   isActive ? "border-b-2 border-cyan-700" : "";
 
 export default function Index() {
+  return (
+    <div className="flex flex-col w-full">
+      <div className="flex flex-row">
+        <div className="border max-h-full sm:w-1/4">
+          <LeftNav />
+        </div>
+        <div className="sm:w-2/4">
+          <Header />
+          <Main />
+        </div>
+        <div className="sm:w-1/4 border max-h-full right-0">
+          <RightNav />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Header() {
+  return (
+    <header className="prose h-[48px]">
+      <NavLink to={"/"} className={navLinkClass}>
+        home
+      </NavLink>
+      <NavLink to={"/post"} className={navLinkClass}>
+        post
+      </NavLink>
+      <NavLink to={"/about"} className={navLinkClass}>
+        about
+      </NavLink>
+    </header>
+  );
+}
+
+function Main() {
   const posts = useLoaderData<typeof clientLoader>();
   return (
-    <div className="prose">
-      <header>
-        <NavLink to={"/"} className={navLinkClass}>
-          home
-        </NavLink>
-        <NavLink to={"/post"} className={navLinkClass}>
-          post
-        </NavLink>
-        <NavLink to={"/about"} className={navLinkClass}>
-          about
-        </NavLink>
-      </header>
-      <div>
-        <ul>
-          {[
-            {
-              href: "https://note.com/tmtk75/",
-              text: "note.com",
-            },
-            { href: "https://blog.tmtk.net/", text: "old blog" },
-            { href: "https://zenn.dev/tmtk75", text: "zenn articles" },
-            { href: "https://zenn.dev/tmtk75?tab=scraps", text: "zenn scraps" },
-            { href: "https://memodify.com", text: "memodify.com" },
-            { href: "https://memodify.com/blog", text: "memodify blog" },
-          ].map(({ href, text }) => (
-            <li key={href}>
-              <a target="other" href={href}>{text}</a>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div className="font-sans p-4">
+    <main className="container prose">
+      <div className="flex flex-col">
         {posts.map(({ slug, frontmatter }) => {
           return <Article {...{ slug, frontmatter }} key={slug} />;
         })}
       </div>
-    </div>
+    </main>
   );
 }
 
@@ -108,4 +108,37 @@ function Article({ slug, frontmatter }: PostMeta) {
       <time dateTime={frontmatter.published}>{frontmatter.published}</time>
     </article>
   );
+}
+
+function LeftNav() {
+  return (
+    <nav className="prose container mt-[48px]">
+      <ul>
+        {[
+          {
+            href: "https://note.com/tmtk75/",
+            text: "note.com",
+          },
+          { href: "https://blog.tmtk.net/", text: "old blog" },
+          { href: "https://zenn.dev/tmtk75", text: "zenn articles" },
+          {
+            href: "https://zenn.dev/tmtk75?tab=scraps",
+            text: "zenn scraps",
+          },
+          { href: "https://memodify.com", text: "memodify.com" },
+          { href: "https://memodify.com/blog", text: "memodify blog" },
+        ].map(({ href, text }) => (
+          <li key={href}>
+            <a target="other" href={href}>
+              {text}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  );
+}
+
+function RightNav() {
+  return <nav className="prose container">right nav</nav>;
 }
