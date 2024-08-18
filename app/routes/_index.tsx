@@ -129,7 +129,7 @@ function LeftNav() {
           { href: "https://memodify.com/blog", text: "memodify blog" },
         ].map(({ href, text }) => (
           <li key={href}>
-            <a target="other" href={href}>
+            <a target={href} href={href}>
               {text}
             </a>
           </li>
