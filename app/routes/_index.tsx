@@ -50,24 +50,28 @@ const navLinkClass = ({ isActive }: { isActive: boolean }) =>
 
 export default function Index() {
   return (
-    <div className="flex flex-col w-full">
-      <div className="flex flex-row">
-        <div className="border max-h-full sm:w-1/4">
-          <LeftNav />
-        </div>
-        <div className="sm:w-2/4">
-          <Header />
-          <Main />
-        </div>
-        <div className="sm:w-1/4 border max-h-full right-0">
-          <RightNav />
-        </div>
+    <div className="flex flex-row">
+      <div className="border max-h-full sm:w-1/5">
+        <LeftNavHeader />
+        <LeftNav />
+      </div>
+      <div className="sm:w-3/5">
+        <MainHeader />
+        <Main />
+      </div>
+      <div className="sm:w-1/5 border max-h-full right-0">
+        <RightNavHeader />
+        <RightNav />
       </div>
     </div>
   );
 }
 
-function Header() {
+function LeftNavHeader() {
+  return <header className="prose h-[48px]"></header>;
+}
+
+function MainHeader() {
   return (
     <header className="prose h-[48px]">
       <NavLink to={"/"} className={navLinkClass}>
@@ -79,8 +83,15 @@ function Header() {
       <NavLink to={"/about"} className={navLinkClass}>
         about
       </NavLink>
+      <NavLink to={"/profile"} className={navLinkClass}>
+        profile
+      </NavLink>
     </header>
   );
+}
+
+function RightNavHeader() {
+  return <header className="prose h-[48px]"></header>;
 }
 
 function Main() {
@@ -112,7 +123,7 @@ function Article({ slug, frontmatter }: PostMeta) {
 
 function LeftNav() {
   return (
-    <nav className="prose container mt-[48px]">
+    <nav className="prose container">
       <ul>
         {[
           {
