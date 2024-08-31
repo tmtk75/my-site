@@ -124,6 +124,13 @@ function Article({ slug, frontmatter }: PostMeta) {
 function LeftNav() {
   return (
     <nav className="prose container">
+      <div className="">
+        <img
+          src="/avatar.jpg"
+          alt="avatar"
+          className="rounded-full w-[88px] ml-[2rem]"
+        />
+      </div>
       <ul>
         {[
           {
