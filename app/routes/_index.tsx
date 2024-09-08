@@ -56,6 +56,7 @@ export default function Index() {
         <LeftNav />
       </div>
       <div className="sm:w-3/5">
+        <div>Under construction.</div>
         <MainHeader />
         <Main />
       </div>
