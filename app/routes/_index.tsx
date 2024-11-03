@@ -50,6 +50,19 @@ const navLinkClass = ({ isActive }: { isActive: boolean }) =>
 
 export default function Index() {
   return (
+    <div className="flex flex-row justify-center">
+      <div>
+        <div>
+          <LeftNav />
+        </div>
+        <div>&copy; 2024 Tomotaka Sakuma</div>
+      </div>
+    </div>
+  );
+}
+
+function DraftIndex() {
+  return (
     <div className="flex flex-row">
       <div className="border max-h-full sm:w-1/5">
         <LeftNavHeader />
@@ -135,6 +148,10 @@ function LeftNav() {
       <ul>
         {[
           {
+            href: "https://github.com/tmtk75",
+            text: "github.com",
+          },
+          {
             href: "https://note.com/tmtk75/",
             text: "note.com",
           },
@@ -146,6 +163,10 @@ function LeftNav() {
           },
           { href: "https://memodify.com", text: "memodify.com" },
           { href: "https://memodify.com/blog", text: "memodify blog" },
+          {
+            href: "https://x.com/tmtk75",
+            text: "x.com",
+          },
         ].map(({ href, text }) => (
           <li key={href}>
             <a target={href} href={href}>
