@@ -3,7 +3,7 @@ import {
   type MetaFunction,
   NavLink,
   useLoaderData,
-} from "@remix-run/react";
+} from "react-router";
 
 export const meta: MetaFunction = () => {
   return [

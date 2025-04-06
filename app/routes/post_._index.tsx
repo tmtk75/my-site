@@ -1,4 +1,4 @@
-import { Outlet } from "@remix-run/react";
+import { Outlet } from "react-router";
 
 // post_'s layout is root.tsx
 

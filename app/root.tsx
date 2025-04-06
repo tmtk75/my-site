@@ -4,7 +4,7 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
-} from "@remix-run/react";
+} from "react-router";
 import "./index.scss";
 import "./tailwind.css";
 

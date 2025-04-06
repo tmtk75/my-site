@@ -5,6 +5,6 @@ declare module "*.mdx" {
 }
 
 declare module "virtual:remix/server-build" {
-  import type { ServerBuild } from "@remix-run/node";
+  import type { ServerBuild } from "@react-router/node";
   export const routes: ServerBuild["routes"];
 }
