@@ -55,7 +55,7 @@ export default function Index() {
         <div>
           <LeftNav />
         </div>
-        <div>&copy; 2024 Tomotaka Sakuma</div>
+        <div>&copy; 2025 Tomotaka Sakuma</div>
       </div>
     </div>
   );
